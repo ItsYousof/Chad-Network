@@ -1,0 +1,40 @@
+:root {
+    --red-color: #e13232;
+    --red-color-hover: #cc0000;
+    --blue-color: #007bff;
+    --blue-color-hover: #0056b3;
+}
+
+.red-variant {
+    background-color: var(--red-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.red-variant:hover {
+    background-color: var(--red-color-hover);
+}
+
+.red-variant i {
+    margin-right: 5px;
+    font-size: 1.2em;
+    color: white;
+}
+
+.blue-variant {
+    background-color: var(--blue-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.blue-variant i {
+    margin-right: 5px;
+    font-size: 1.2em;
+    color: white;
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chad Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/uv/sw.js", {
+                    scope: __uv$config.prefix,
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <iframe src="" frameborder="0" id="mainFrameIframe" style="display: none;"></iframe>
+    <div class="login">
+        <div class="overlay"></div>
+        <div class="login-box">
+            <h2>Login</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" onclick="login()">Login</button>
+            <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+        </div>
+    </div>
+    <!-- Add this after the login box -->
+    <div class="signup" style="display: none;">
+        <div class="overlay"></div>
+        <div class="signup-box">
+            <h2>Sign Up</h2>
+            <input type="text" id="signup-username" placeholder="Username" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+            <button onclick="signup()">Sign Up</button>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        </div>
+    </div>
+    <main>
+        <div class="sidebar">
+            <ul class="icons">
+                <li class="active" onclick="tabSwitch('home')"><i class="fas fa-home"></i></li>
+                <li onclick="tabSwitch('games')"><i class="fas fa-gamepad"></i></li>
+                <li onclick="tabSwitch('posts')"><i class="fas fa-user-friends"></i></li>
+            </ul>
+            <div class="sidebar-separator bottom"></div>
+            <ul class="icons bottom">
+                <li onclick="tabSwitch('settings')"><i class="fas fa-cog"></i><span>Settings</span></li>
+                <li onclick="tabSwitch('about')"><i class="fas fa-question-circle"></i><span>Help</span></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="topbar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Chad Network">
+                </div>
+                <div class="search">
+                    <input type="text" placeholder="Search...">
+                </div>
+            </div>
+
+            <div id="home" style="display: none;">
+                <h1>Welcome to Chad Network</h1>
+                <p>Connect, share, and explore with friends and communities.</p>
+                <div class="featured-content">
+                    <!-- Featured content will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div id="about" style="display: none;">
+                <h1>About Chad Network</h1>
+                <p>Chad Network is a social platform designed for meaningful connections and engaging discussions.</p>
+                <h2>Our Mission</h2>
+                <p>To create a space where ideas flourish and communities thrive.</p>
+                <h2>Key Features</h2>
+                <ul>
+                    <li>Seamless posting and sharing</li>
+                    <li>Real-time interactions</li>
+                    <li>Diverse community spaces</li>
+                    <li>Privacy-focused design</li>
+                </ul>
+            </div>
+
+            <div id="posts" style="display: none;">
+                <div class="posts-container">
+                    <div class="main-feed">
+                        <div class="tweet-box">
+                            <textarea placeholder="What's happening?"></textarea>
+                            <div class="tweet-options">
+                                <ul>
+                                    <li><i class="fas fa-image"></i></li>
+                                    <li><i class="fas fa-poll"></i></li>
+                                    <li><i class="fas fa-smile"></i></li>
+                                    <li><i class="fas fa-calendar"></i></li>
+                                </ul>
+                                <button class="tweet-button">Tweet</button>
+                            </div>
+                        </div>
+                        <div id="tweets" class="tweets">
+                            <!-- Example tweet structure -->
+                            <div class="tweet">
+                                <div class="tweet-header">
+                                    <img src="https://via.placeholder.com/48" alt="User Avatar">
+                                    <div class="tweet-header-info">
+                                        <span class="name">John Doe</span>
+                                        <span class="username">@johndoe</span>
+                                    </div>
+                                </div>
+                                <div class="tweet-content">
+                                    This is an example tweet. It can contain text, mentions, hashtags, and links.
+                                </div>
+                                <div class="tweet-actions">
+                                    <div class="tweet-action"><i class="far fa-comment"></i> 0</div>
+                                    <div class="tweet-action"><i class="fas fa-retweet"></i> 0</div>
+                                    <div class="tweet-action"><i class="far fa-heart"></i> 0</div>
+                                    <div class="tweet-action"><i class="far fa-share-square"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="games" id="games" style="display: none;">
+                <h2>Search</h2>
+                <input type="text" id="game-search" placeholder="Search on GOOGLE or insert a URL...">
+                <h2>Games</h2>
+                <div class="game-types">
+                    <div class="game-type" onclick="openGame('https://stickman.pro/iframe/index.html')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Stickman Hook</span>
+                    </div>
+                    <div class="game-type" onclick="openGame('https://html5.gamedistribution.com/rvvASMiM/1377b99c10284c229423118a941af3b1/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.mathnook.com%2Ffun-games-2%2Fovo.html&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5tYXRobm9vay5jb20vZnVuLWdhbWVzLTIvb3ZvLmh0bWwiLCJwYXJlbnREb21haW4iOiJtYXRobm9vay5jb20iLCJ0b3BEb21haW4iOiJtYXRobm9vay5jb20iLCJoYXNJbXByZXNzaW9uIjpmYWxzZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9')">
+                        <i class="fas fa-chess"></i>
+                        <span>OvO</span>
+                    </div>
+                    <div class="game-type" onclick="openGame('https://1v1.lol/')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>1v1.lol</span>
+                    </div>
+                    <div class="game-type" onclick="openGame('https://html5.gamedistribution.com/rvvASMiM/6493b872f0564380a7adad671d1e0a57/index.html?gd_sdk_referrer_url=https%3A%2F%2Fgamedistribution.com%2Fgames%2Ftime-shooter-3%3A-swat&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2dhbWVkaXN0cmlidXRpb24uY29tL2dhbWVzL3RpbWUtc2hvb3Rlci0zOi1zd2F0IiwicGFyZW50RG9tYWluIjoiZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ0b3BEb21haW4iOiJkb3JkbGUuaW8iLCJoYXNJbXByZXNzaW9uIjpmYWxzZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9')">
+                        <i class="fas fa-gun"></i>
+                        <span>Time Shooter 3:SWAT</span>
+                    </div>
+                    <div class="game-type" onclick="openGame('https://orteil.dashnet.org/cookieclicker/')">
+                        <i class="fas fa-cookie"></i>
+                        <span>Cookie Clicker</span>
+                    </div>
+                    <div class="game-type" onclick="openGame('https://play.geforcenow.com/')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>GEFORCE NOW</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="settings" id="settings" style="display: none;">
+                <div class="settings-separator"><p>General</p><span></span></div>
+                <div class="settings-item">
+                    <i class="fas fa-moon"></i>
+                    <span>Theme</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="theme-toggle" class="theme-toggle" checked>
+                        <label for="theme-toggle"></label>
+                    </div>
+                </div>
+                <div class="settings-item" id="appearance-setting">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Sidebar Position</span>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="sidebar-position-toggle" class="sidebar-position-toggle">
+                        <label for="sidebar-position-toggle"></label>
+                    </div>
+                </div>
+                <div class="settings-separator"><p>Account</p><span></span></div>
+                <div class="settings-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                    <button onclick="logout()" class="red-variant"><i class="fas fa-sign-out-alt"></i>Logout</button>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-user-times"></i>
+                    <span>Delete Account</span>
+                    <button onclick="confirmDeleteAccount()" class="red-variant"><i class="fas fa-user-times"></i>Delete Account</button>
+                </div>
+                <div class="settings-item">
+                    <i class="fas fa-key"></i>
+                    <span>Change Password</span>
+                    <input type="password" id="change-password-current" placeholder="Current Password" required>
+                    <input type="password" id="change-password-new" placeholder="New Password" required>
+                    <input type="password" id="change-password-confirm" placeholder="Confirm New Password" required>
+                    <button onclick="changePassword()" class="blue-variant"><i class="fas fa-key"></i>Change Password</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+    <script src="js/authentication.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/tweets.js"></script>
+</body>
+</html>
