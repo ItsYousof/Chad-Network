@@ -94,11 +94,10 @@ function login() {
     .then(data => {
         if (data.success) {
             sessionStorage.setItem('loggedIn', 'true');
-            sessionStorage.setItem('username', username); // Store the username
-            currentUser = username; // Set currentUser
+            sessionStorage.setItem('currentUser', username); // Store the username
             document.querySelector('.login').style.display = 'none';
             console.log('Login successful');
-            sessionStorage.setItem('currentUser', username);
+            location.reload(); // Reload the page to update the UI
         } else {
             console.log('Login failed:', data.message);
         }
@@ -108,6 +107,7 @@ function login() {
 
 function logout(accountDeleted = false) {
     sessionStorage.removeItem('loggedIn');
+    sessionStorage.removeItem('currentUser'); // Remove the username
     localStorage.removeItem('theme');
     localStorage.removeItem('sidebarPosition');
     document.querySelector('.login').style.display = 'flex';
@@ -123,6 +123,7 @@ function logout(accountDeleted = false) {
     if (accountDeleted) {
         alert('Your account has been successfully deleted.');
     }
+    location.reload(); // Reload the page to update the UI
 }
 
 function showSignup() {
