@@ -68,6 +68,10 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+app.get('/cool', (req, res) => {
+    res.send('school is kinda nice, no? but this website is still in development, so please be patient.SIKE I DONT CARE!!!');
+});
+
 // Login route
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
