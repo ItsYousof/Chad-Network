@@ -1,0 +1,26 @@
+[
+    {
+        "username": "admin",
+        "password": "admin",
+        "verified": true,
+        "role": "Admin"
+    },
+    {
+        "username": "Ransh",
+        "password": "slow69",
+        "verified": true,
+        "role": "User"
+    },
+    {
+        "username": "public",
+        "password": "public",
+        "verified": true,
+        "role": "User"
+    },
+    {
+        "username": "Nalla Balls",
+        "password": "balls69",
+        "verified": true,
+        "role": "User"
+    }
+]

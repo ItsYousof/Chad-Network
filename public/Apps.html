@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shard Network | Apps</title>
+    <script src="Javascript/store.js" defer></script>
+    <link rel="icon" href="Images/tab_logo.png" type="image/x-icon"/>
+    <script src="https://kit.fontawesome.com/828c19ed9a.js" crossorigin="anonymous"></script>
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/uv/sw.js", {
+                    scope: __uv$config.prefix,
+                });
+            });
+        }
+  </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        :root {
+            --page: url('/./assets/media/background/full2.png');
+            --background: rgba(255, 255, 255, 0.02);
+            --background-filter: blur(10px) brightness(80%);
+            --background-secondary: #4545459e;
+            --background-dark: #121212;
+            --background-other: #282828;
+
+            --title: #fff;
+            --block: #2a2a2a;
+            --block-buttons: #333;
+            --input: #444;
+            --column: #353535;
+            --accent-color: #444;
+            --main: #222;
+
+            --text-primary: #fff;
+            --text-secondary: #b0b0b0;
+            --text-placeholder: #aaa;
+            --text-dark: #555;
+
+            --transparent: rgb(0, 0, 0, 0);
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+        nav {
+            
+            padding: 8px;
+            border-radius: 15px;
+            height: 90px;
+            width: 80vw;
+            max-width: 90vw;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.384), rgba(0, 0, 0, 0.384));
+            box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(20, 20, 20, 0.349);
+            position: relative;
+            margin: 10px auto;
+        }
+        nav button {
+            float: right;
+        }
+        .--buttonnav {
+            --ripple-background: rgb(185, 185, 185);
+            --ripple-opacity: 2.0;
+            --ripple-duration: 300ms;
+            width: 85px;
+            height: 85px;
+            align-items: right;
+            border: none;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            color: white;
+            cursor: pointer;
+            font-family: poppins;
+            font-size: 15px;
+            line-height: 1.25;
+            margin: -5px;
+            margin-top: 3px;
+            margin-left: 10px;
+            padding: 0px 10px;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: .2s;
+        }
+        
+        .--buttonnav:hover {
+        border: transparent 2px rgba(255, 255, 255, 0.596);
+        background-color: rgba(201, 201, 201, 0.37);
+        transform: translate(-0%, -3%);
+        }
+
+        .--buttonnav:active {
+        background-color: rgba(255, 255, 255, 0.466);
+        transform: translateY(0);
+        }
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+        }
+        .bubbles-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bubble {
+            position: absolute;
+            bottom: -100px; /* Initial position below the viewport */
+            width: 20px;
+            height: 20px;
+            background-color: rgba(36, 119, 18, 0.891);
+            border-radius: 50%;
+            animation: bubbleRise 10s linear infinite;
+        }
+        @keyframes bubbleRise {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px); /* Final position above the viewport */
+                opacity: 0;
+            }
+        }
+        .background-gradient {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 200px; /* Adjust the height of the gradient */
+            background: linear-gradient(to top, rgba(34, 34, 34, 0.9), transparent);
+            z-index: -1;
+            animation: fadeUp 10s linear infinite;
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .apps {
+            display: flex; justify-content: center; flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .apps .app {
+            display: inline-block;
+            text-align: center;
+            height: 120px;
+            width: 120px;
+            padding: 30px;
+            text-decoration: none;
+            text-align: center;
+            border: solid 2px transparent;
+            border-radius: 5px;
+            transition: .5s ease-in-out;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            justify-content: center;
+        }
+        .app img {
+            border-radius: 17px;
+            width: 103px;
+            height: 103px
+        }
+        .apps .app:hover {
+            background: rgba(255, 255, 255, 0.144);
+            color: white;
+            border: solid 2px rgba(255, 255, 255, 0.26);
+            border-radius: 5px;
+            transform: scale(1.09);
+            transition: 1s;
+        }
+        #fileInput {
+			display: none;
+		}
+
+		#fileLabel {
+            font-family: 'Poppins', sans-serif;
+			padding: 20px 40px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 18px;
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+			margin-bottom: 20px;
+		}
+
+		#fileLabel:hover {
+			background-color: #0056b3;
+		}
+
+		#fileLabel:active {
+			background-color: #004080;
+		}
+
+		#fileLabel:before {
+			content: 'Choose HTML File';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 1;
+			transition: transform 0.3s ease;
+		}
+
+		#fileLabel:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 300%;
+			height: 300%;
+			background-color: rgba(255, 255, 255, 0.1);
+			border-radius: 50%;
+			transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+			z-index: 0;
+			transform: translate(-50%, -50%);
+			opacity: 0;
+		}
+
+		#fileInput:focus+#fileLabel:after {
+			width: 0;
+			height: 0;
+			opacity: 1;
+		}
+
+		#fileInfo {
+			color: #fff;
+			margin-bottom: 20px;
+			display: none;
+		}
+
+		#loadButton {
+			padding: 15px 30px;
+			background-color: #28a745;
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 18px;
+			transition: all 0.3s ease;
+		}
+
+		#loadButton:hover {
+			background-color: #218838;
+		}
+
+		#loadButton:active {
+			background-color: #1e7e34;
+		}
+		.use {
+			color:#fff;
+            font-family: 'Poppins', sans-serif;
+			margin-top:2%;
+            text-decoration: none;
+            padding: 15px 30px;
+            background-color: #007bff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.6s ease;
+		}
+
+        .use:hover {
+            transform: translateY(-5px);
+            background-color: #0056b3;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .fileloader-containter {
+            margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background-color: #222;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+        }
+        .particles-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.7); /* Adjust color and opacity as needed */
+    border-radius: 50%;
+    animation: particleMove linear infinite;
+}
+
+@keyframes particleMove {
+    0% {
+        transform: translateY(-100vh); /* Start from the bottom of the page */
+    }
+    100% {
+        transform: translateY(100vh); /* Move to the top of the page */
+    }
+}
+
+        .--title {
+        font-family: poppins;
+        color: white;
+        float: left;
+        font-size: 25px;
+        margin-top: 28px;
+        width: 250px;
+        transition: .2s;
+        border-radius: 7px;
+        text-align: center;
+        text-decoration: none;
+
+    }
+
+
+.--title:hover {
+  background-color: rgba(255, 255, 255, 0.336);
+  border-width: 10px;
+  transform: translate(-0%, -3%);
+  box-shadow: 0px 8px 48px 0px rgba(0, 0, 0, 0.4);
+}
+    .--title:active {
+      background-color: rgba(255, 255, 255, 0.336);
+      border-width: 10px;
+      transform: translate(-0%, -3%);
+      box-shadow: 0px 8px 48px 0px rgba(0, 0, 0, 0.4);
+    }
+    nav a {
+        text-align: center;
+        text-decoration: none;
+        margin: 8px;
+        color: white;
+        font-family: poppins;
+        font-size: 20px;
+        transition: .2s;
+        border-radius: 7px;
+    }
+    #custom-menu {
+        display: none;
+        font-family: poppins;
+        position: fixed;
+        background-color: rgba(51, 50, 50, 0.322);
+        min-width: 200px;
+        color: rgba(255, 255, 255, 0.747);
+        font-weight: lighter;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border: 1.5px solid #9e9e9e4b;
+        padding: 8px;
+        border-radius: 8px;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        }
+        #custom-menu a {
+            cursor: pointer;
+            font-family: poppins;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            transition: .2s;
+            font-size: 15px;
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+        #custom-menu a:hover {
+            background-color: #ddd;
+        }
+        #game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: -1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+    <script src="Javascript/proxy.js"></script>
+</head>
+<body>
+    <nav>
+        <button class="--buttonnav" onclick="window.location.href = '/games'">
+            <i class="fa-solid fa-gamepad" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Games</button>
+        <button class="--buttonnav" onclick="window.location.href = '/apps'">
+            <i class="fa-solid fa-shapes" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Apps</button>
+        <button class="--buttonnav" onclick="window.location.href = '/settings'">
+            <i class="fa-solid fa-gear" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Settings</button>
+        <a href="/" class="--title" >
+            Shard Network
+        </a>
+    </nav>
+    <div class="content">
+        <h2>Shard Network - Apps</h2>
+        <p>File Loader, download HTML files and load them!!</p>
+        <p></p>
+    </div>
+
+    <iframe src="" frameborder="0" id="game-frame"></iframe>
+    <div class="fileloader-containter">
+        <input type="file" id="fileInput" accept=".html" onchange="loadFile(event)">
+        <label for="fileInput" id="fileLabel">Choose HTML File</label>
+
+        <div id="fileInfo"></div>
+        <button id="loadButton" onclick="loadContent()">Load</button>
+    </div>
+    <div class="apps">
+        <div class="app" onclick="window.location.href = 'Apps/cal.html'";>
+            <img src="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/Calculator_512.png" alt="">
+            <p>Calculator</p>
+        </div>
+        <div class="app" onclick="openGame('https://discord.com')";>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEoDkusPLrzvK4GIIFZL6_PwTUKlQEKDcAbSe8aVcIUw&s" alt="">
+            <p>Discord</p>
+        </div>
+        <div class="app" onclick="openGame('https://github.com')";>
+            <img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_1280.png" alt="">
+            <p>Github</p>
+        </div>
+        <div class="app" onclick="openGame('https://amazon.com')";>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToEqyzmWneHEmjrjpo1YFvKVG5dynn7ZFgNVGrpnuc3A&s" alt="">
+            <p>Amazon</p>
+        </div>
+        <div class="app" onclick="openGame('https://google.com')";>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="">
+            <p>Google</p>
+        </div>
+        <div class="app" onclick="openGame('https://vscode.dev')";>
+            <img src="https://chris-ayers.com/assets/images/vscode-logo.png" alt="">
+            <p>VSCode</p>
+        </div>
+        <div class="app" onclick="openGame('https://coolmathgames.com')";>
+            <img src="https://ih1.redbubble.net/image.1896622144.7959/mo,small,flatlay,product_square,600x600.jpg" alt="">
+            <p>Coolmathgames</p>
+        </div>
+        <div class="app" onclick="openGame('https://play.geforcenow.com/mall/#/loginwall')";>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKFNBudm39rtb0Ri3PiUoRUClCK8DlE6dAlwtmYN3fzQ&s" alt="">
+            <p>Geforce NOW</p>
+        </div>
+    </div>
+    </div>
+    <div class="particles-container">
+        <!-- Generating bubbles dynamically using JavaScript -->
+      </div>
+    </div>
+    <div class="background-gradient"></div>
+    <div id="custom-menu">
+        <a href="/settings">
+            <i class="fa-solid fa-gears"></i>
+            Settings</a>
+        <a href="#" onclick="goAboutBlank()">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Go About:Blank</a>
+        <a href="/games">
+            <i class="fa-solid fa-gamepad"></i>
+            Play Game</a>
+            <a href="https://classroom.google.com">
+                <i class="fa-brands fa-google" style="margin-right: 5px;"></i>
+                Panic Link
+            </a>
+    </div>
+    <!-- JavaScript to dynamically generate bubbles -->
+    <script src="Javascript/menu.js"></script>
+    
+
+    <script src="Javascript/fileloader.js"></script>
+    <script src="Javascript/particles.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+                    var iconHref = document.querySelector('link[rel="icon"]').href;
+            console.log(iconHref);
+            // Compare the iconHref with different icon URLs and set the document title accordingly
+            if (iconHref === 'https://pbs.twimg.com/profile_images/1676663837423194112/yw0xwYoT_400x400.jpg') {
+                document.title = 'Clever Portal';
+            }  if (iconHref === 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_Docs.width-500.format-webp.webp') {
+                document.title = 'Google Docs';
+            }  if (iconHref === 'https://sites.gsu.edu/tools/files/2015/03/GSlides-logo-xcfzsu.png') {
+                document.title = 'Google Slides';
+            }  if (iconHref === 'https://play-lh.googleusercontent.com/ujsa1M8GdT-fo-GfPazpUwgPXVWEOWKUgKZk-SdnUhmcL3opS24MiHe6ypEgqxGpllw') {
+                document.title = 'Classlink';
+            }  if (iconHref === 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png') {
+                document.title = 'Google';
+            } if (iconHref === 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png') {
+                document.title = 'Google Drive - My Drive';
+            }
+        });
+    </script>
+</body>
+</html>

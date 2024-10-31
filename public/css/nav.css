@@ -1,0 +1,87 @@
+nav {
+            
+    padding: 8px;
+    border-radius: 15px;
+    height: 90px;
+    width: 80vw;
+    max-width: 90vw;
+    overflow: hidden;
+    background: linear-gradient(rgba(0, 0, 0, 0.384), rgba(0, 0, 0, 0.384));
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(20, 20, 20, 0.349);
+    position: relative;
+    margin: 10px auto;
+}
+nav button {
+    float: right;
+}
+.--buttonnav {
+    width: 85px;
+    height: 85px;
+    align-items: right;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    color: white;
+    cursor: pointer;
+    font-family: poppins;
+    font-size: 15px;
+    line-height: 1.25;
+    margin: -5px;
+    margin-top: 3px;
+    margin-left: 10px;
+    padding: 0px 10px;
+    margin-right: 20px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.--buttonnav:hover {
+border: transparent 2px rgba(255, 255, 255, 0.596);
+background-color: rgba(201, 201, 201, 0.37);
+transform: translate(-0%, -3%);
+}
+
+.--buttonnav:active {
+background-color: rgba(255, 255, 255, 0.466);
+transform: translateY(0);
+}
+
+.--title {
+    font-family: poppins;
+    color: white;
+    float: left;
+    font-size: 25px;
+    margin-top: 28px;
+    width: 250px;
+    transition: .2s;
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+
+.--title:hover {
+background-color: rgba(255, 255, 255, 0.336);
+border-width: 10px;
+transform: translate(-0%, -3%);
+box-shadow: 0px 8px 48px 0px rgba(0, 0, 0, 0.4);
+}
+.--title:active {
+  background-color: rgba(255, 255, 255, 0.336);
+  border-width: 10px;
+  transform: translate(-0%, -3%);
+  box-shadow: 0px 8px 48px 0px rgba(0, 0, 0, 0.4);
+}
+nav a {
+    text-align: center;
+    text-decoration: none;
+    margin: 8px;
+    color: white;
+    font-family: poppins;
+    font-size: 20px;
+    transition: .2s;
+    border-radius: 7px;
+}

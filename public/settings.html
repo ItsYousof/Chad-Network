@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shard Network | Settings</title>
+    <link rel="icon" href="Images/tab_logo.png" type="image/x-icon"/>
+    <script src="https://kit.fontawesome.com/828c19ed9a.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Poppins, sans-serif;
+            background-color: #222;
+            color: #fff;
+        }
+        
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            text-align: center;
+        }
+        .content .activeSearch {
+            display: none;
+        }
+        .content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+        }
+        .settings-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 1% 20px 20px 20px;
+        }
+        .setting {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            backdrop-filter: blur(4px);
+            height: 300px;
+            margin: 20px;
+            background-color: rgb(24 24 24 / 32%);
+            width: 400px;
+            text-align: center;
+            box-shadow: 0px 8px 11px 0px rgba(0,0,0,0.4);
+            border: 2px solid rgba(61, 61, 61, 0.466);
+        }
+        .setting-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .setting-input {
+            margin-bottom: 10px;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-align: center;
+            color: #000; 
+        }
+        .title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+        #tab_icons img{
+            display: inline;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 35px;
+            border-radius: 4px;
+            height: 35px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.2s ease;
+        }
+
+        #tab_icons img:hover{
+            transform: scale(1.1);
+            transition: all 0.2s;
+        }
+        @media screen and (max-width: 600px) {
+            #tab_icons img{
+                width: 30px;
+                height: 30px;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            #tab_icons img{
+                width: 30px;
+                height: 30px;
+            }
+            
+        }
+        @media screen and (max-height: 600px) {
+            #tab_icons img{
+                width: 30px;
+                height: 30px;
+            }
+        }
+        @media screen and (max-height: 800px) {
+            #tab_icons img{
+                width: 30px;
+                height: 30px;
+            }
+        }
+        @media screen and (max-width: 1300px) {
+            #tab_icons img{
+                width: 30px;
+                height: 30px;
+                margin: 2px;
+            }
+            
+        }
+        .particles-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.7); /* Adjust color and opacity as needed */
+            border-radius: 50%;
+            animation: particleMove linear infinite;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translateY(-100vh); /* Start from the bottom of the page */
+            }
+            100% {
+                transform: translateY(100vh); /* Move to the top of the page */
+            }
+        }
+    
+    p {
+        font-family: 'Poppins', sans-serif;
+        font-size: large;
+    }
+    #themeselection button {
+        margin: 5px;
+    }
+    #themeselection select {
+        margin: 5px;
+        width: 150px;
+        height: 30px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        color: #000;
+        border: 2px solid rgba(61, 61, 61, 0.466);
+        border-radius: 3px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    #themeselection select:hover {
+        cursor: pointer;
+    }
+    button {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        font-weight: 200;
+        background-color: rgb(24 24 24 / 32%);
+        text-align: center;
+        box-shadow: 0px 8px 11px 0px rgba(0,0,0,0.4);
+        border: 2px solid rgba(61, 61, 61, 0.466);
+        border-radius: 3px;
+        color: #fff;
+        padding: 8px;
+        margin: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    button:hover {
+        background-color: rgb(24 24 24 / 50%);
+        transform: scalex(1.1);
+    }
+    #custom-menu {
+        display: none;
+        font-family: poppins;
+        position: fixed;
+        background-color: rgba(51, 50, 50, 0.322);
+        min-width: 200px;
+        color: rgba(255, 255, 255, 0.747);
+        font-weight: lighter;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border: 1.5px solid #9e9e9e4b;
+        padding: 8px;
+        border-radius: 8px;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        }
+        #custom-menu a {
+            cursor: pointer;
+            font-family: poppins;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            transition: .2s;
+            font-size: 15px;
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+        #custom-menu a:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <link rel="stylesheet" href="css/nav.css">
+    <script src="Javascript/menu.js"></script>
+</head>
+<body>
+    <nav>
+        <button class="--buttonnav" onclick="window.location.href = '/games'">
+            <i class="fa-solid fa-gamepad" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Games</button>
+        <button class="--buttonnav" onclick="window.location.href = '/apps'">
+            <i class="fa-solid fa-shapes" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Apps</button>
+        <button class="--buttonnav" onclick="window.location.href = '/settings'">
+            <i class="fa-solid fa-gear" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Settings</button>
+        <a href="/" class="--title" >
+            Shard Network
+        </a>
+    </nav>
+    <div id="custom-menu">
+        <a href="/settings">
+            <i class="fa-solid fa-gears"></i>
+            Settings</a>
+        <a href="#" onclick="goAboutBlank()">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Go About:Blank</a>
+        <a href="/games">
+            <i class="fa-solid fa-gamepad"></i>
+            Play Game</a>
+            <a href="https://classroom.google.com">
+                <i class="fa-brands fa-google" style="margin-right: 5px;"></i>
+                Panic Link
+            </a>
+    </div>
+    <div class="settings-container">
+        <h1 class="title">Settings</h1>
+        <div class="setting">
+            <h2 class="setting-title">Tab Cloaker</h2>
+            <input type="text" id="Tabname" class="setting-input">
+            <button onclick="setTabName()">Clock website</button>
+            <p>Enter the name of the website you want to clock</p>
+        </div>
+        <div class="setting aboutblank">
+            <h2 class="setting-title">About:Blank</h2>
+            <button onclick="toggleAboutBlank()">Toogle About:Blank</button>
+            <button onclick="goAboutBlank()">Go About:Blank</button>
+            <p>Enable or Disable About:Blank</p>
+        </div>
+        <div class="setting">
+            <h2 class="setting-title">Panic Key Information</h2>
+            <input type="text" id="panicKey" maxlength="1" class="setting-input" placeholder="Panic Key" value="`" readonly>
+            <input type="text" id="panicKeyInput" class="setting-input" placeholder="Enter URL" value="https://classroom.google.com" readonly>
+            <p>Panic Key will send you to the URL in the input above</p>
+        </div>
+        <div class="setting">
+            <h2 class="setting-title">Set Tab Icon</h2>
+            <div id="tab_icons"></div>
+            <p>Set the Tab Icon</p>
+        </div>
+        <div class="setting">
+            <h2 class="setting-title">Particles</h2>
+            <button onclick="enableParticles()">Enable Particles</button>
+            <button onclick="disableParticles()">Disable Particles</button> <p>Disable or Enable Particles</p>
+        </div>
+        <div class="setting" id="themeselection" style="display: none;">
+            <h2 class="setting-title">Theme Changer</h2>
+            <select name="" id="themes">
+                <option value="" disabled>Selet Theme</option>
+                <option value="default" selected>Dark Shard</option>
+                <option value="darkgreen">Dark Green</option>
+                <option value="darkblue">Dark Blue</option>
+            </select>
+            <button onclick="setTheme()">Set Theme</button>
+        </div>
+
+    </div>
+    <div class="particles-container">
+        <!-- Generating bubbles dynamically using JavaScript -->
+      </div>
+    <div class="bubbles-container">
+        <!-- Generating bubbles dynamically using JavaScript -->
+    </div>
+    <div class="background-gradient"></div>
+
+    <script>
+
+    </script>
+    <script src="Javascript/particles.js"></script>
+    <!-- JavaScript to dynamically generate bubbles -->
+    <script src="Javascript/store.js" defer></script>
+    <script src="Javascript/themes.js"></script>
+    <div class="particles-container">
+        <!-- Generating bubbles dynamically using JavaScript -->
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+                    var iconHref = document.querySelector('link[rel="icon"]').href;
+            console.log(iconHref);
+            // Compare the iconHref with different icon URLs and set the document title accordingly
+            if (iconHref === 'https://pbs.twimg.com/profile_images/1676663837423194112/yw0xwYoT_400x400.jpg') {
+                document.title = 'Clever Portal';
+            }  if (iconHref === 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_Docs.width-500.format-webp.webp') {
+                document.title = 'Google Docs';
+            }  if (iconHref === 'https://sites.gsu.edu/tools/files/2015/03/GSlides-logo-xcfzsu.png') {
+                document.title = 'Google Slides';
+            }  if (iconHref === 'https://play-lh.googleusercontent.com/ujsa1M8GdT-fo-GfPazpUwgPXVWEOWKUgKZk-SdnUhmcL3opS24MiHe6ypEgqxGpllw') {
+                document.title = 'Classlink';
+            }  if (iconHref === 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png') {
+                document.title = 'Google';
+            }
+        });
+      </script>
+</body>
+</html>

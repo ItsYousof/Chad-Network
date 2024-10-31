@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shard Network | Home</title>
+    <link rel="icon" href="Images/tab_logo.png" type="image/x-icon"/>
+    <script src="https://kit.fontawesome.com/828c19ed9a.js" crossorigin="anonymous"></script>
+    <script src="Javascript/store.js"></script>
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/uv/sw.js", {
+                    scope: __uv$config.prefix,
+                });
+            });
+        }
+  </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        :root {
+            --page: url('/./assets/media/background/full2.png');
+            --background: rgba(255, 255, 255, 0.02);
+            --background-filter: blur(10px) brightness(80%);
+            --background-secondary: #4545459e;
+            --background-dark: #121212;
+            --background-other: #282828;
+
+            --title: #fff;
+            --block: #2a2a2a;
+            --block-buttons: #333;
+            --input: #444;
+            --column: #353535;
+            --accent-color: #444;
+            --main: #222;
+
+            --text-primary: #fff;
+            --text-secondary: #b0b0b0;
+            --text-placeholder: #aaa;
+            --text-dark: #555;
+
+            --transparent: rgb(0, 0, 0, 0);
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+
+        form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        background: none;
+        }
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+        }
+        .bubbles-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bubble {
+            position: absolute;
+            bottom: -100px; /* Initial position below the viewport */
+            width: 20px;
+            height: 20px;
+            background-color: rgba(36, 119, 18, 0.891);
+            border-radius: 50%;
+            animation: bubbleRise 10s linear infinite;
+        }
+        @keyframes bubbleRise {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px); /* Final position above the viewport */
+                opacity: 0;
+            }
+        }
+        .background-gradient {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 200px; /* Adjust the height of the gradient */
+            background: linear-gradient(to top, rgba(34, 34, 34, 0.9), transparent);
+            z-index: -1;
+            animation: fadeUp 10s linear infinite;
+        }
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .apps {
+            display: flex; justify-content: center; flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .apps .app {
+            display: inline-block;
+            text-align: center;
+            height: 120px;
+            width: 120px;
+            padding: 30px;
+            text-decoration: none;
+            text-align: center;
+            border: solid 2px transparent;
+            border-radius: 5px;
+            transition: .5s ease-in-out;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            justify-content: center;
+        }
+        .app img {
+            border-radius: 17px;
+            width: 103px;
+            height: 103px
+        }
+        .apps .app:hover {
+            background: rgba(255, 255, 255, 0.144);
+            color: white;
+            border: solid 2px rgba(255, 255, 255, 0.26);
+            border-radius: 5px;
+            transform: scale(1.09);
+            transition: 1s;
+        }
+        .particles-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.7); /* Adjust color and opacity as needed */
+    border-radius: 50%;
+    animation: particleMove linear infinite;
+}
+
+@keyframes particleMove {
+    0% {
+        transform: translateY(-100vh); /* Start from the bottom of the page */
+    }
+    100% {
+        transform: translateY(100vh); /* Move to the top of the page */
+    }
+}
+
+        .--title {
+        font-family: poppins;
+        color: white;
+        float: left;
+        font-size: 25px;
+        margin-top: 28px;
+        width: 250px;
+        transition: .2s;
+        border-radius: 7px;
+        text-align: center;
+        text-decoration: none;
+
+    }
+
+
+.--title:hover {
+  background-color: rgba(255, 255, 255, 0.336);
+  border-width: 10px;
+  transform: translate(-0%, -3%);
+  box-shadow: 0px 8px 48px 0px rgba(0, 0, 0, 0.4);
+}
+    .--title:active {
+      background-color: rgba(255, 255, 255, 0.336);
+      border-width: 10px;
+      transform: translate(-0%, -3%);
+      box-shadow: 0px 8px 48px 0px rgba(0, 0, 0, 0.4);
+    }
+    nav a {
+        text-align: center;
+        text-decoration: none;
+        margin: 8px;
+        color: white;
+        font-family: poppins;
+        font-size: 20px;
+        transition: .2s;
+        border-radius: 7px;
+    }
+    #search-container {
+            display: flex;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10vh;
+        }
+        
+        #searchInput {
+            outline: none;
+            color: #fff;
+            width: 50vw;
+            height: 5vh;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.2);
+            background: var(--background-secondary);
+            -webkit-backdrop-filter: var(--background-filter);
+            backdrop-filter: var(--background-filter);
+            border: solid;
+            border-color: none;
+            border-width: 0;
+            border-radius: 3px;
+            padding: 28px;
+        }
+        .--searchbutton {
+            margin-left: 10px;
+            border: none;
+            border-radius: 3px;
+            background: var(--background-secondary);
+            -webkit-backdrop-filter: var(--background-filter);
+            backdrop-filter: var(--background-filter);
+            box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #fff;
+            padding: 10px;
+            height: 5vh;
+            transition: all 0.5s linear;
+        }
+        @media screen and (max-width: 600px) {
+            .--searchbutton {
+                padding: 5px;
+                height: 5vh;
+                font-size: 14px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+            
+        }
+        @media screen and (max-height: 600px) {
+            .--searchbutton {
+                padding: 5px;
+                height: 5vh;
+                font-size: 14px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+            
+        }
+        @media screen and (max-height: 800px) {
+            .--searchbutton {
+                padding: 5px;
+                height: 5vh;
+                font-size: 14px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+            
+        }
+        #search-container button:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+        #searchInput .activeSearch {
+            display: none;
+        }
+        #searchInput:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        #searchInput:focus {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes errorShake {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(5px);
+            }
+            50% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+
+        }
+        .particles-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.7); /* Adjust color and opacity as needed */
+    border-radius: 50%;
+    animation: particleMove linear infinite;
+}
+
+@keyframes particleMove {
+    0% {
+        transform: translateY(-100vh); /* Start from the bottom of the page */
+    }
+    100% {
+        transform: translateY(100vh); /* Move to the top of the page */
+    }
+}
+        @keyframes successShake {
+            0% {
+                transform: translateX(0);
+                text-shadow: none;
+            }
+            25% {
+                transform: translateX(-5px);
+                text-shadow: none;
+            }
+            50% {
+                transform: translateX(-10px);
+                text-shadow: none;
+            }
+            75% {
+                transform: translateX(-5px);
+                text-shadow: none;
+            }
+            100% {
+                transform: translateX(0);
+                text-shadow: none;
+            }
+        }
+        #searchError {
+            color: red;
+            display: none;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+nav {
+            
+            padding: 8px;
+            border-radius: 15px;
+            height: 90px;
+            width: 80vw;
+            max-width: 90vw;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.384), rgba(0, 0, 0, 0.384));
+            box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(20, 20, 20, 0.349);
+            position: relative;
+            margin: 10px auto;
+        }
+        nav button {
+            float: right;
+        }
+        .--buttonnav {
+            --ripple-background: rgb(185, 185, 185);
+            --ripple-opacity: 2.0;
+            --ripple-duration: 300ms;
+            width: 85px;
+            height: 85px;
+            align-items: right;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            color: white;
+            cursor: pointer;
+            font-family: poppins;
+            font-size: 15px;
+            line-height: 1.25;
+            margin: -5px;
+            margin-top: 3px;
+            margin-left: 10px;
+            padding: 0px 10px;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: .2s;
+        }
+        
+        .--buttonnav:hover {
+        border: transparent 2px rgba(255, 255, 255, 0.596);
+        background-color: rgba(201, 201, 201, 0.37);
+        transform: translate(-0%, -3%);
+        }
+
+        .--buttonnav:active {
+        background-color: rgba(255, 255, 255, 0.466);
+        transform: translateY(0);
+        }
+        footer {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: var(--text-primary);
+            font-size: 30px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+        }
+        footer i {
+            margin-left: 10px;
+        }
+        footer i:hover {
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+        #time {
+            font-family: poppins;
+            position: absolute;
+            width: 130px;
+            font-size: 18px;
+            bottom: 1px;
+            left: 50%;
+            right: 50%;
+            border-radius: 10px;
+            transform: translateX(-60%);
+            background-attachment: fixed;
+            margin-bottom: 15px;
+        }
+        input {
+  padding: 20px;
+  width: 40%;
+  background-color: rgba(22, 22, 22, 0.637);
+  color: white;
+  outline: none;
+  border: 2px solid rgba(51, 51, 51, 0.575);
+  font-family: poppins;
+  font-size: 15px;
+  text-align: center;
+  border-radius: 15px;
+  position: relative;
+  transition: 0.2s;
+  opacity: 100%;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.proxybar:focus {
+  width: 45%;
+  padding-left: 60px;
+  text-align: left;
+}
+
+.proxybar:focus::placeholder {
+  color: transparent;
+}
+.searchbar {
+  height: 10px;
+  width: 500px;
+}
+    .splashText {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: var(--text-primary);
+        font-size: 15px;
+
+    }
+    .frameContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    button {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: var(--text-primary);
+        font-size: 15px;
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+    button:hover {
+        transform: translateY(-5px)
+    }
+    #custom-menu {
+        display: none;
+        font-family: poppins;
+        position: fixed;
+        background-color: rgba(51, 50, 50, 0.322);
+        min-width: 200px;
+        color: rgba(255, 255, 255, 0.747);
+        font-weight: lighter;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        border: 1.5px solid #9e9e9e4b;
+        padding: 8px;
+        border-radius: 8px;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        }
+        #custom-menu a {
+            cursor: pointer;
+            font-family: poppins;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            transition: .2s;
+            font-size: 15px;
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+        #custom-menu a:hover {
+            background-color: #ddd;
+        }
+
+        #game-frame {
+          width: 100%;
+          height: 100vh;
+          border: none;
+          z-index: -1;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+
+          display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button class="--buttonnav" onclick="window.location.href = '/games'">
+            <i class="fa-solid fa-gamepad" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Games</button>
+        <button class="--buttonnav" onclick="window.location.href = '/apps'">
+            <i class="fa-solid fa-shapes" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Apps</button>
+        <button class="--buttonnav" onclick="window.location.href = '/settings'">
+            <i class="fa-solid fa-gear" style="font-size: 30px; margin-bottom: 10px;"></i>
+            Settings</button>
+        <a href="/" class="--title" >
+            Shard Network
+        </a>
+    </nav>
+    <div class="content">
+        <h2>Welcome to Shard Network!</h2>
+    </div>
+    <iframe src="" frameborder="0" id="game-frame"></iframe>
+    <div class="frameContainer">
+        <input type="text" name="url" class="form__input proxybar" id="name" tag="searchbar" style="font-family:poppins;font-size:20px;z-index:1;" placeholder="Type URL or search query" >
+        <p class="splashText " id="placeholder"></p>
+
+    </div>
+    <div class="messages">
+        <h6 id="searchError"></h6>
+    </div>
+
+    <div id="searchResults"></div>
+
+    <footer>
+        <i class="fa-brands fa-square-gitlab" style="font-size: 30px; margin-bottom: 10px;" onclick="window.location.href = 'https://gitlab.com/shardnetwork/Shard-network'"></i>
+        <i class="fa-brands fa-discord" style="font-size: 30px; margin-bottom: 10px;" onclick="window.location.href = 'https://discord.gg/bC7XdSxXNy'"></i>
+    </footer>
+    <div class="clock-container">
+        <div class="clock" id="time"></div>
+    </div>
+    <div class="bubbles-container">
+        <!-- Generating bubbles dynamically using JavaScript -->
+    </div>
+    <div class="particles-container">
+        <!-- Generating bubbles dynamically using JavaScript -->
+      </div>
+    <div class="background-gradient"></div>
+    <div class="loading-animation">
+        <div class="overlay"></div>
+    </div>
+    <div id="custom-menu">
+        <a href="/settings">
+            <i class="fa-solid fa-gears" style="margin-right: 5px;"></i>
+            Settings</a>
+        <a href="#" onclick="goAboutBlank()">
+            <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 5px;"></i>
+            Go About:Blank</a>
+        <a href="/games">
+            <i class="fa-solid fa-gamepad" style="margin-right: 5px;"></i>
+            Play Game</a>
+        <a href="https://classroom.google.com">
+            <i class="fa-brands fa-google" style="margin-right: 5px;"></i>
+            Panic Link
+        </a>
+    </div>
+    <script>
+        function loadRandomPhrase() {
+            let phrases = [
+                "Welcome to Shard Network!",
+                "A place to play games and chat with friends, have fun!",
+                "Join discord for more links!",
+                "Cloaking your tab will give a better experience!",
+                "Visit our main website for more links and more content!",
+                "Check out our discord for more links!",
+                "Right-Click on the link to open it in a new tab!"
+            ];
+            let randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+            document.getElementById("placeholder").innerHTML = randomPhrase;
+        }
+        // Call the generateParticles function when the DOM content is loaded
+        loadRandomPhrase();
+    </script>
+    <script>
+        function goAboutBlank() {
+            console.log(window.location.href);
+            var Newindow = window.open('about:blank', '_blank');
+            Newindow.document.write('<style>body{margin: 0; padding: 0; overflow: hidden;} iframe{width: 100%; height: 100%; border: 0; position: absolute; margin: 0; padding: 0;}</style>');
+            Newindow.document.write('<iframe src=' + window.location.href + '></iframe>');
+        }
+                // Get the href attribute of the link element with rel="icon"
+                document.addEventListener('DOMContentLoaded', function() {
+                    var iconHref = document.querySelector('link[rel="icon"]').href;
+            console.log(iconHref);
+            // Compare the iconHref with different icon URLs and set the document title accordingly
+            if (iconHref === 'https://pbs.twimg.com/profile_images/1676663837423194112/yw0xwYoT_400x400.jpg') {
+                document.title = 'Clever Portal';
+            }  if (iconHref === 'https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Google_Docs.width-500.format-webp.webp') {
+                document.title = 'Google Docs';
+            }  if (iconHref === 'https://sites.gsu.edu/tools/files/2015/03/GSlides-logo-xcfzsu.png') {
+                document.title = 'Google Slides';
+            }  if (iconHref === 'https://play-lh.googleusercontent.com/ujsa1M8GdT-fo-GfPazpUwgPXVWEOWKUgKZk-SdnUhmcL3opS24MiHe6ypEgqxGpllw') {
+                document.title = 'Classlink';
+            }  if (iconHref === 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png') {
+                document.title = 'Google';
+            } if (iconHref === 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/2295px-Google_Drive_icon_%282020%29.svg.png') {
+                document.title = 'Google Drive - My Drive';
+            }
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            function clock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const seconds = now.getSeconds().toString().padStart(2, "0");
+    
+      if (hours > 12) {
+        hours -= 12;
+      }
+      if (hours === 0) {
+        hours = 12;
+      }
+    
+      const timeString = `${hours}:${minutes}:${seconds}`;
+      document.getElementById("time").textContent = timeString;
+    }
+        clock();
+        setInterval(clock, 1000);
+        })
+    </script>
+    <script src="Javascript/menu.js"></script>
+    <script src="Javascript/particles.js"></script>
+    <script src="Javascript/proxy.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+:root {
+    --page: url('/./assets/media/background/full2.png');
+    --background: rgba(255, 255, 255, 0.02);
+    --background-filter: blur(10px) brightness(80%);
+    --background-secondary: #4545459e;
+    --background-dark: #121212;
+    --background-other: #282828;
+    --darkBlue: rgba(19, 34, 48, 0.8);
+    --darkGreen: rgba(0, 128, 0, 0.8);
+}
+
+body .darkblue {
+    background: rgba(19, 34, 48, 0.8);
+    color: #fff;
+    --text-primary: #fff;
+    --text-secondary: #b0b0b0;
+}
+
+body .darkgreen {
+    background: var(--darkGreen);
+    color: #fff;
+    --text-primary: #fff;
+    --text-secondary: #b0b0b0;
+}
+
+body .darkshard {
+    background-color: #222;
+    color: #fff;
+    --text-primary: #fff;
+    --text-secondary: #b0b0b0;
+}
